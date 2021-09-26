@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const { User } = require('./models/User')
@@ -16,10 +16,13 @@ mongoose.connect(config.mongoURI)
 .then(() => console.log('MongoDB Connected...'))
 .catch(err => console.log(err))
 
+app.get('/api/hello',(req,res)=> {
+    res.send("안녕하세요~")
+})
 
 app.get('/', (req,res) => res.send('Hello World!zzzz'))
 
-app.post('/register', (req,res) => {
+app.post('/api/users/register', (req,res) => {
     //회원 가입 할 때 필요한 정보들을 client에서 가져오면
     //그 것들을 데이터 베이스에 넣어준다.
     const user = new User(req.body)
